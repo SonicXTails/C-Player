@@ -1,0 +1,212 @@
+﻿<Window x:Class="PlayMe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlayMe"
+        mc:Ignorable="d"
+        xmlns:dlg="clr-namespace:Microsoft.Win32;assembly=PresentationFramework"
+        Title="MainWindow" Height="450" Width="800" Background="#FF2D2D2D">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF480505" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="Open_folder_with_music" 
+            Grid.Row="0"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            ToolTip="MaterialDesignRaisedButton with Round Corners"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Grid.ColumnSpan="5" 
+            Grid.RowSpan="1" 
+            Background="#FF6EB556" 
+            BorderBrush="#FF5FAF4E" 
+            FontFamily="Bahnschrift SemiBold Condensed" 
+            Content="Открыть директорию" 
+            Foreground="Black" 
+            Click="Open_folder_with_music_Click"/>
+
+        <Button x:Name="History" 
+            Grid.Row="0"
+            Grid.Column="5"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            ToolTip="MaterialDesignRaisedButton with Round Corners"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Grid.ColumnSpan="5" 
+            Grid.RowSpan="1" 
+            Background="#FF6EB556" 
+            BorderBrush="#FF5FAF4E"
+            FontFamily="Bahnschrift SemiBold Condensed" 
+            Content="Открыть историю прослушивания"
+            Foreground="Black" Click="History_Click"/>
+
+        <ListBox x:Name="List_with_music"
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.RowSpan="9"
+            Grid.ColumnSpan="10"
+            SelectionChanged="List_with_music_SelectionChanged"/>
+
+
+        <MediaElement x:Name="media" LoadedBehavior="Manual" MediaOpened="media_MediaOpened"/>
+        <Slider x:Name="Slider_for_duration"
+            Grid.Row="11"
+            Grid.ColumnSpan="10" 
+            Foreground="#FF23AD58" ValueChanged="Slider_for_duration_ValueChanged"/>
+
+        <Button x:Name="Play_Pause_Button"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            ToolTip="MaterialDesignFloatingActionButton"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Grid.Column="1"
+            Grid.RowSpan="2" 
+            Grid.Row="12" 
+            VerticalAlignment="Top"
+            Background="#FF1EB13B" 
+            BorderBrush="#FF418C37" Click="Play_Pause_Button_Click_1">
+            <Image 
+                Height="35" 
+                Width="40" 
+                Source="/play_pause_icon_137298.png"/>
+        </Button>
+
+        <Button x:Name="Pre_tarck"
+            Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+            ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Grid.Row="12"
+            Grid.RowSpan="2"
+            Background="#FF1EB13B" 
+            BorderBrush="#FF418C37" Click="Pre_tarck_Click">
+            <Image 
+                Height="25" 
+                Width="30" 
+                Source="/skip_video_go_next_icon_191649 (1).png" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+
+        <Button x:Name="Next_Track"
+            Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryDarkButton}"
+            ToolTip="MaterialDesignFloatingActionMiniSecondaryDarkButton"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Grid.Row="12"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Background="#FF1EB13B" 
+            BorderBrush="#FF418C37" 
+            Click="Next_Track_Click">
+            <Image 
+                Height="25" 
+                Width="34" 
+                Source="/123123.png"/>
+        </Button>
+
+        <Rectangle 
+            Grid.Column="3" 
+            HorizontalAlignment="Center" 
+            Height="50" 
+            Grid.RowSpan="3" 
+            Grid.Row="12" 
+            Stroke="#FF115D0A" 
+            VerticalAlignment="Top" 
+            Width="4" 
+            Fill="#FF1EB13B"/>
+
+        <Button x:Name="Repeat_Button"
+            Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}"
+            Content="Повтор"
+            FontFamily="Bahnschrift SemiBold Condensed" 
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Grid.Column="4"
+            Grid.Row="12"
+            Grid.RowSpan="2"
+            Click="Repeat_Button_Click" 
+            Background="#FF1EB13B" 
+            BorderBrush="#FF107B25"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left" 
+            Width="75"/>
+
+        <Button x:Name="Random"
+            Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}"
+            Content="Случайно"
+            FontFamily="Bahnschrift SemiBold Condensed" 
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Grid.Column="5"
+            Grid.Row="12"
+            Grid.RowSpan="2"
+            Click="Random_Click" 
+            BorderBrush="#FF128C2A" 
+            Background="#FF1EB13B"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Width="75"/>
+
+        <Slider x:Name="Slider_for_volume"
+            Grid.Row="12"
+            Grid.ColumnSpan="4" 
+            Grid.Column="6"
+            Foreground="#FF23AD58" 
+            Margin="40,16,40,15" 
+            Grid.RowSpan="2"/>
+
+
+        <TextBlock x:Name="All_Time"
+            Grid.ColumnSpan="1" 
+            Grid.Row="10" 
+            Text="...."
+            TextWrapping="Wrap"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontFamily="Bahnschrift SemiBold Condensed"
+            />
+
+        <TextBlock x:Name="Time_Of_Playing" 
+            Grid.ColumnSpan="1" 
+            Grid.Row="10" 
+            Grid.Column="9"
+            Text="...."
+            TextWrapping="Wrap"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontFamily="Bahnschrift SemiBold Condensed"/>
+    </Grid>
+</Window>
